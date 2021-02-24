@@ -1,13 +1,26 @@
 var gui = new dat.GUI();
 var params = {
-    Ellipse_Size: 30,
+    N: 20,
+    Dispersion: 0.1,
+    Opacity: 20,
+    Ellipse_Size: 300,
+    StrokeWeight: 2,
     Download_Image: function () { return save(); },
 };
-gui.add(params, "Ellipse_Size", 0, 100, 1);
+gui.add(params, "N", 5, 20, 1);
+gui.add(params, "Dispersion", 0, 0.5, 0.0001);
+gui.add(params, "Opacity", 0, 255, 1);
+gui.add(params, "Ellipse_Size", 100, 1000, 1);
+gui.add(params, "StrokeWeight", 0, 20, 1);
 gui.add(params, "Download_Image");
 function draw() {
-    background(0);
-    ellipse(mouseX, mouseY, params.Ellipse_Size);
+    background('black');
+    for (var i = 0; i < 8; i++) {
+        for (var j = i % 2; j < 8; j += 2) {
+            fill('white');
+            rect(i * width / 8, j * height / 8, width / 8, height / 8);
+        }
+    }
 }
 function setup() {
     p6_CreateCanvas();
